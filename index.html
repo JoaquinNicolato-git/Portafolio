@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joaquín Nicolato — Portafolio</title>
+    <style>
+        :root {
+            --bg: #fafbf9;
+            --surface: #ffffff;
+            --surface-soft: #f2f6f3;
+            --text: #1b221e;
+            --muted: #5c6961;
+            --border: #e1eae4;
+            --accent: #dcebe2;
+            --accent-ink: #274734;
+            --accent-hover: #c8dfd1;
+            --accent-border: #b8d4c3;
+            --radius: 14px;
+            --transition: 180ms ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        /* Barra superior */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(250, 251, 249, 0.88);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            font-weight: 650;
+            font-size: 0.98rem;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--accent);
+            border: 1px solid var(--accent-ink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-ink);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 72px 0 52px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--accent-ink);
+            border: 1px solid var(--accent-border);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            font-weight: 700;
+            max-width: 18ch;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 62ch;
+            margin-bottom: 28px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 550;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: background var(--transition), border-color var(--transition), transform var(--transition);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--accent-ink);
+            border-color: var(--accent-border);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            border-color: #a4c6b2;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-soft);
+            border-color: var(--accent-border);
+        }
+
+        /* Secciones */
+        section {
+            padding: 44px 0;
+        }
+
+        .section-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            letter-spacing: -0.02em;
+            font-weight: 650;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        /* Aviso de metodología con IA */
+        .ai-callout {
+            background: var(--surface-soft);
+            border: 1px solid var(--accent-border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 22px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .ai-callout span {
+            color: var(--accent-ink);
+            font-weight: 700;
+        }
+
+        .ai-callout strong {
+            color: var(--accent-ink);
+            font-weight: 600;
+        }
+
+        /* Filtros */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            background: var(--surface);
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .filter-btn:hover {
+            color: var(--accent-ink);
+            background: var(--surface-soft);
+            border-color: var(--accent-border);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: var(--accent-ink);
+            border-color: var(--accent-border);
+            font-weight: 600;
+        }
+
+        /* Grid de proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--accent-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(39, 71, 52, 0.06);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .pill {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: var(--surface-soft);
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .pill.soft-green {
+            background: var(--accent);
+            color: var(--accent-ink);
+            border-color: var(--accent-border);
+        }
+
+        .pill.ai-badge {
+            background: #e7f3ec;
+            color: #2c523b;
+            border-color: #cbe2d4;
+        }
+
+        .card h3 {
+            font-size: 1.12rem;
+            letter-spacing: -0.015em;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            font-size: 0.76rem;
+            color: var(--muted);
+            background: var(--surface-soft);
+            border: 1px solid #e6efe9;
+            padding: 3px 9px;
+            border-radius: 7px;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: var(--accent-ink);
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0;
+            transition: color var(--transition), transform var(--transition);
+        }
+
+        .link-btn:hover {
+            text-decoration: underline;
+            transform: translateX(2px);
+        }
+
+        /* Stack */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .stack-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px;
+            transition: border-color var(--transition);
+        }
+
+        .stack-box:hover {
+            border-color: var(--accent-border);
+        }
+
+        .stack-box h3 {
+            font-size: 0.98rem;
+            color: var(--accent-ink);
+            margin-bottom: 10px;
+        }
+
+        .stack-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contacto */
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius);
+            padding: 26px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            max-width: 48ch;
+            margin-top: 6px;
+            font-size: 0.94rem;
+        }
+
+        footer {
+            padding: 28px 0 40px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.85rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        /* Modal de detalle */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(27, 34, 30, 0.35);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            z-index: 50;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            max-width: 560px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(27, 34, 30, 0.14);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .close-btn {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .close-btn:hover {
+            background: var(--accent);
+            color: var(--accent-ink);
+            border-color: var(--accent-border);
+        }
+
+        .modal-body p {
+            color: var(--muted);
+            font-size: 0.94rem;
+            margin-bottom: 14px;
+        }
+
+        .modal-ai-note {
+            background: #e7f3ec;
+            border: 1px solid #cbe2d4;
+            color: #2c523b;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.86rem;
+            margin-bottom: 14px;
+        }
+
+        .modal-list {
+            margin: 10px 0 18px 18px;
+            color: var(--text);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                gap: 12px;
+                font-size: 0.84rem;
+            }
+
+            .hero {
+                padding-top: 48px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <a class="brand" href="#">
+                <span class="brand-dot"></span>
+                <span>Joaquín Nicolato</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#stack">Stack</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <span class="eyebrow">Desarrollo Web · Herramientas Operativas · Flujos con IA</span>
+                <h1>Producción de aplicaciones y sistemas simples para resolver problemas reales.</h1>
+                <p>
+                    Desarrollo sitios web, aplicaciones operativas y flujos automatizados para negocios y gestión
+                    diaria, apoyándome en herramientas de Inteligencia Artificial para acelerar el desarrollo,
+                    iterar soluciones con agilidad y mantener una base sólida en lógica, estructuras de datos y POO.
+                </p>
+                <div class="actions">
+                    <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+                    <a class="btn btn-secondary" href="#contacto">Contactarme</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Proyectos</h2>
+                        <p class="section-sub">Sistemas de reservas, PWAs operativas, catálogos y automatizaciones.</p>
+                    </div>
+                </div>
+
+                <div class="ai-callout">
+                    <span>✦</span>
+                    <div>
+                        <strong>Metodología asistida por IA:</strong> Todos estos proyectos fueron desarrollados
+                        integrando Inteligencia Artificial como copiloto técnico (diseño de arquitectura, escritura y
+                        depuración de código, e integración de APIs/automatizaciones), combinando criterio propio de
+                        negocio con iteración rápida.
+                    </div>
+                </div>
+
+                <div class="filters" role="group" aria-label="Filtrar proyectos">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="web">Web & Reservas</button>
+                    <button class="filter-btn" data-filter="operaciones">Operaciones & Stock</button>
+                    <button class="filter-btn" data-filter="automatizacion">Automatización</button>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid"></div>
+            </div>
+        </section>
+
+        <section id="stack">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Stack y fundamentos</h2>
+                        <p class="section-sub">Herramientas que uso en proyectos reales, flujos con IA y base técnica.</p>
+                    </div>
+                </div>
+
+                <div class="stack-grid">
+                    <div class="stack-box">
+                        <h3>Web & Backend</h3>
+                        <ul>
+                            <li>HTML5, CSS3 y JavaScript (ES6+)</li>
+                            <li>PHP y MySQL</li>
+                            <li>Progressive Web Apps (Service Workers, manifest)</li>
+                            <li>Git, GitHub y despliegue en Netlify / Pages</li>
+                        </ul>
+                    </div>
+
+                    <div class="stack-box">
+                        <h3>Automatización & Gestión</h3>
+                        <ul>
+                            <li>Google Sheets + Google Apps Script</li>
+                            <li>Make (workflows y webhooks)</li>
+                            <li>Integración con Gemini y Meta Business Suite</li>
+                            <li>Notion para organización y flujos</li>
+                        </ul>
+                    </div>
+
+                    <div class="stack-box">
+                        <h3>Flujo de Trabajo con IA</h3>
+                        <ul>
+                            <li>Desarrollo asistido y depuración con IA</li>
+                            <li>Diseño de prompts y asistentes conversacionales</li>
+                            <li>Generación automatizada de contenido</li>
+                            <li>Prototipado rápido e iteración funcional</li>
+                        </ul>
+                    </div>
+
+                    <div class="stack-box">
+                        <h3>Base de Programación</h3>
+                        <ul>
+                            <li>Pensamiento computacional y lógica</li>
+                            <li>Algoritmos y estructuras de datos</li>
+                            <li>Programación Orientada a Objetos (POO)</li>
+                            <li>Diseño de interfaces simples y claras</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="container">
+                <div class="contact-box">
+                    <div>
+                        <h2>¿Hablamos?</h2>
+                        <p>
+                            Disponible para proyectos web, herramientas a medida, automatizaciones y oportunidades
+                            junior / trainee en desarrollo.
+                        </p>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="https://wa.me/5491126716143" target="_blank"
+                            rel="noopener noreferrer">WhatsApp</a>
+                        <a class="btn btn-secondary" href="https://github.com/JoaquinNicolato-git" target="_blank"
+                            rel="noopener noreferrer">GitHub</a>
+                        <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank"
+                            rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"
+            style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+            <span>Joaquín Nicolato · Buenos Aires, Argentina</span>
+            <span>Desarrollado con flujo asistido por IA</span>
+        </div>
+    </footer>
+
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <div>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                        <span class="pill soft-green" id="modalCategory"></span>
+                        <span class="pill ai-badge" id="modalAiBadge"></span>
+                    </div>
+                    <h3 id="modalTitle" style="margin-top:8px;"></h3>
+                </div>
+                <button class="close-btn" id="closeModal" aria-label="Cerrar detalle">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="modalSummary"></p>
+                <div class="modal-ai-note" id="modalAiNote"></div>
+                <strong style="font-size:0.88rem;">Puntos clave:</strong>
+                <ul class="modal-list" id="modalHighlights"></ul>
+                <div class="tags" id="modalTags"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            {
+                id: "salto-gigante",
+                title: "Salto Gigante",
+                category: "web",
+                categoryLabel: "Web & Reservas",
+                aiBadge: "Asistente IA + Dev con IA",
+                aiDetail: "Desarrollado con asistencia de IA en arquitectura PHP/MySQL y lógica de disponibilidad, e integra un asistente virtual propio (Inflabot) para guiar consultas.",
+                featured: true,
+                summary: "Plataforma web de alquiler y reservas con catálogo dinámico, bloqueo de stock por fecha y flujos de pedido.",
+                highlights: [
+                    "Categorías dinámicas y validación en el checkout.",
+                    "Bloqueo de stock por fecha por 24 horas para evitar superposiciones.",
+                    "Envío de pedidos por correo y WhatsApp junto a un asistente interactivo (Inflabot)."
+                ],
+                tags: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "IA"]
+            },
+            {
+                id: "inflamundo",
+                title: "Inflamundo PWA",
+                category: "operaciones",
+                categoryLabel: "Operaciones & Stock",
+                aiBadge: "Desarrollado con IA",
+                aiDetail: "Prototipado, estructurado y optimizado mediante flujos asistidos por IA para resolver la gestión operativa móvil sin dependencias pesadas.",
+                featured: true,
+                summary: "Aplicación web progresiva pensada para gestionar operaciones diarias desde el celular de forma rápida.",
+                highlights: [
+                    "Control de limpieza de inflables, equipamiento, camionetas y asistencia.",
+                    "Persistencia local con localStorage, Service Workers y manifest.json.",
+                    "Desplegada para uso ágil en movimiento desde el teléfono."
+                ],
+                tags: ["HTML", "CSS", "JavaScript", "PWA", "Flujo IA"]
+            },
+            {
+                id: "dulce-club",
+                title: "Dulce Club + Sheets",
+                category: "automatizacion",
+                categoryLabel: "Automatización",
+                aiBadge: "Desarrollado con IA",
+                aiDetail: "Construido con apoyo de IA tanto en la interfaz del catálogo web como en la programación de los scripts de automatización en Google Apps Script.",
+                featured: false,
+                summary: "Catálogo web interactivo con panel oculto de administración y respaldo automático de ventas y gastos en Sheets.",
+                highlights: [
+                    "Carrito y armado de pedidos directo hacia WhatsApp con datos persistentes.",
+                    "Panel oculto para administrar productos y precios.",
+                    "Scripts en Google Apps Script para registrar ventas, gastos y archivar por mes."
+                ],
+                tags: ["HTML", "CSS", "JavaScript", "Google Sheets", "Apps Script", "IA"]
+            },
+            {
+                id: "cookstock",
+                title: "CookStock",
+                category: "operaciones",
+                categoryLabel: "Operaciones & Stock",
+                aiBadge: "Desarrollado con IA",
+                aiDetail: "Iterado y refinado con asistencia de IA para modelar el descuento de ingredientes por lote/vencimiento y la lectura rápida de códigos.",
+                featured: false,
+                summary: "Aplicación para controlar lotes por vencimiento, recetas base, preparaciones, calendario y lista de compras.",
+                highlights: [
+                    "Organización de lotes con alertas de vencimiento y cálculo de faltantes.",
+                    "Vinculación entre recetas, preparaciones agendadas y compras.",
+                    "Ingreso rápido de mercadería con escaneo / lectura de códigos."
+                ],
+                tags: ["JavaScript", "HTML", "CSS", "localStorage", "Flujo IA"]
+            },
+            {
+                id: "social-make",
+                title: "Publicación Automatizada en Grupos",
+                category: "automatizacion",
+                categoryLabel: "Automatización",
+                aiBadge: "Integración nativa con IA",
+                aiDetail: "Flujo diseñado con soporte de IA que utiliza Gemini de forma nativa para redactar descripciones comerciales antes de publicar.",
+                featured: false,
+                summary: "Flujo automatizado en Make para generar textos con IA y publicar imágenes en grupos de Facebook.",
+                highlights: [
+                    "Conexión entre Google Drive, Gemini y Meta Business Suite.",
+                    "Redacción automática de copys y publicación programada/recurrente.",
+                    "Reduce tareas repetitivas de difusión en redes."
+                ],
+                tags: ["Make", "Google Drive", "Gemini", "Meta Business Suite"]
+            }
+        ];
+
+        const grid = document.getElementById("projectsGrid");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const modalBackdrop = document.getElementById("modalBackdrop");
+        const closeModalBtn = document.getElementById("closeModal");
+
+        function renderProjects(filter = "all") {
+            const filtered = filter === "all"
+                ? projects
+                : projects.filter((p) => p.category === filter);
+
+            grid.innerHTML = filtered.map((project) => `
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <span class="pill ${project.featured ? "soft-green" : ""}">${project.categoryLabel}</span>
+              <span class="pill ai-badge">${project.aiBadge}</span>
+            </div>
+            <h3>${project.title}</h3>
+            <p>${project.summary}</p>
+            <div class="tags">
+                ${project.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="link-btn" onclick="openProjectModal('${project.id}')">Ver detalles →</button>
+          </div>
+        </article>
+      `).join("");
+        }
+
+        function openProjectModal(id) {
+            const project = projects.find((p) => p.id === id);
+            if (!project) return;
+
+            document.getElementById("modalCategory").textContent = project.categoryLabel;
+            document.getElementById("modalAiBadge").textContent = project.aiBadge;
+            document.getElementById("modalTitle").textContent = project.title;
+            document.getElementById("modalSummary").textContent = project.summary;
+            document.getElementById("modalAiNote").textContent = project.aiDetail;
+            document.getElementById("modalHighlights").innerHTML = project.highlights
+                .map((item) => `<li>${item}</li>`)
+                .join("");
+            document.getElementById("modalTags").innerHTML = project.tags
+                .map((tag) => `<span class="tag">${tag}</span>`)
+                .join("");
+
+            modalBackdrop.classList.add("open");
+            modalBackdrop.setAttribute("aria-hidden", "false");
+        }
+
+        function closeProjectModal() {
+            modalBackdrop.classList.remove("open");
+            modalBackdrop.setAttribute("aria-hidden", "true");
+        }
+
+        filterButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                filterButtons.forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                renderProjects(btn.dataset.filter);
+            });
+        });
+
+        closeModalBtn.addEventListener("click", closeProjectModal);
+        modalBackdrop.addEventListener("click", (e) => {
+            if (e.target === modalBackdrop) closeProjectModal();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeProjectModal();
+        });
+
+        renderProjects();
+    </script>
+</body>
+
+</html>  
