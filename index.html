@@ -350,6 +350,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
             padding-top: 12px;
             border-top: 1px solid var(--border);
         }
@@ -362,12 +363,32 @@
             font-weight: 600;
             cursor: pointer;
             padding: 4px 0;
+            text-decoration: none;
             transition: color var(--transition), transform var(--transition);
         }
 
         .link-btn:hover {
             text-decoration: underline;
             transform: translateX(2px);
+        }
+
+        .demo-pill-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-ink);
+            background: var(--accent);
+            border: 1px solid var(--accent-border);
+            padding: 4px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background var(--transition);
+        }
+
+        .demo-pill-link:hover {
+            background: var(--accent-hover);
         }
 
         /* Stack */
@@ -510,6 +531,14 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
+        }
+
+        .modal-actions {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
         }
 
         @media (max-width: 640px) {
@@ -689,6 +718,11 @@
                 <strong style="font-size:0.88rem;">Puntos clave:</strong>
                 <ul class="modal-list" id="modalHighlights"></ul>
                 <div class="tags" id="modalTags"></div>
+                <div class="modal-actions" id="modalActions" style="display:none;">
+                    <a class="btn btn-primary" id="modalDemoBtn" href="#" target="_blank" rel="noopener noreferrer">
+                        Abrir aplicación ↗
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -703,6 +737,7 @@
                 aiBadge: "Asistente IA + Dev con IA",
                 aiDetail: "Desarrollado con asistencia de IA en arquitectura PHP/MySQL y lógica de disponibilidad, e integra un asistente virtual propio (Inflabot) para guiar consultas.",
                 featured: true,
+                demoUrl: null,
                 summary: "Plataforma web de alquiler y reservas con catálogo dinámico, bloqueo de stock por fecha y flujos de pedido.",
                 highlights: [
                     "Categorías dinámicas y validación en el checkout.",
@@ -719,6 +754,7 @@
                 aiBadge: "Desarrollado con IA",
                 aiDetail: "Prototipado, estructurado y optimizado mediante flujos asistidos por IA para resolver la gestión operativa móvil sin dependencias pesadas.",
                 featured: true,
+                demoUrl: null,
                 summary: "Aplicación web progresiva pensada para gestionar operaciones diarias desde el celular de forma rápida.",
                 highlights: [
                     "Control de limpieza de inflables, equipamiento, camionetas y asistencia.",
@@ -735,6 +771,7 @@
                 aiBadge: "Desarrollado con IA",
                 aiDetail: "Construido con apoyo de IA tanto en la interfaz del catálogo web como en la programación de los scripts de automatización en Google Apps Script.",
                 featured: false,
+                demoUrl: null,
                 summary: "Catálogo web interactivo con panel oculto de administración y respaldo automático de ventas y gastos en Sheets.",
                 highlights: [
                     "Carrito y armado de pedidos directo hacia WhatsApp con datos persistentes.",
@@ -751,6 +788,7 @@
                 aiBadge: "Desarrollado con IA",
                 aiDetail: "Iterado y refinado con asistencia de IA para modelar el descuento de ingredientes por lote/vencimiento y la lectura rápida de códigos.",
                 featured: false,
+                demoUrl: "https://joaquinnicolato-git.github.io/CookStocks/",
                 summary: "Aplicación para controlar lotes por vencimiento, recetas base, preparaciones, calendario y lista de compras.",
                 highlights: [
                     "Organización de lotes con alertas de vencimiento y cálculo de faltantes.",
@@ -767,6 +805,7 @@
                 aiBadge: "Integración nativa con IA",
                 aiDetail: "Flujo diseñado con soporte de IA que utiliza Gemini de forma nativa para redactar descripciones comerciales antes de publicar.",
                 featured: false,
+                demoUrl: null,
                 summary: "Flujo automatizado en Make para generar textos con IA y publicar imágenes en grupos de Facebook.",
                 highlights: [
                     "Conexión entre Google Drive, Gemini y Meta Business Suite.",
@@ -781,6 +820,8 @@
         const filterButtons = document.querySelectorAll(".filter-btn");
         const modalBackdrop = document.getElementById("modalBackdrop");
         const closeModalBtn = document.getElementById("closeModal");
+        const modalActions = document.getElementById("modalActions");
+        const modalDemoBtn = document.getElementById("modalDemoBtn");
 
         function renderProjects(filter = "all") {
             const filtered = filter === "all"
@@ -802,6 +843,7 @@
           </div>
           <div class="card-footer">
             <button class="link-btn" onclick="openProjectModal('${project.id}')">Ver detalles →</button>
+            ${project.demoUrl ? `<a class="demo-pill-link" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer">Probar app ↗</a>` : ""}
           </div>
         </article>
       `).join("");
@@ -822,6 +864,13 @@
             document.getElementById("modalTags").innerHTML = project.tags
                 .map((tag) => `<span class="tag">${tag}</span>`)
                 .join("");
+
+            if (project.demoUrl) {
+                modalDemoBtn.href = project.demoUrl;
+                modalActions.style.display = "flex";
+            } else {
+                modalActions.style.display = "none";
+            }
 
             modalBackdrop.classList.add("open");
             modalBackdrop.setAttribute("aria-hidden", "false");
@@ -852,4 +901,4 @@
     </script>
 </body>
 
-</html>  
+</html>
